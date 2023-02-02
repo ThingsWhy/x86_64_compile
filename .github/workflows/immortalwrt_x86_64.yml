@@ -37,7 +37,7 @@ jobs:
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-ext4-combined-efi.img.gz" "../immortalwrt-x86-64-generic-ext4-combined-efi.img.gz"
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz" "../immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz"
         mv -f "bin/targets/x86/64/sha256sums" "../immortalwrt-18.06-sha256sums"
-    - name: Upload ImmortalWrt-18.06 SHA256SUM Hash
+    - name: Upload ImmortalWrt-21.02 SHA256SUM Hash
       uses: actions/upload-artifact@v2
       with:
         name: immortalwrt-21.02-sha256sums
