@@ -34,7 +34,7 @@ jobs:
     - name: Build ImmortalWrt-21.02
       run: |
         cd "/home/runner/immortalwrt"
-        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64" ".config"
+        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_test" ".config"
         make defconfig
         make -j1 V=s
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-ext4-combined-efi.img.gz" "../immortalwrt-x86-64-generic-ext4-combined-efi.img.gz"
