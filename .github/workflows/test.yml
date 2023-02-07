@@ -30,6 +30,8 @@ jobs:
         sed -i '$a src-git-full kenzo https://github.com/kenzok8/openwrt-packages;master' feeds.conf.default
         sed -i '$a src-git-full small https://github.com/kenzok8/small;master' feeds.conf.default
         ./scripts/feeds update -a
+        rm -rf feeds/packages/lang/golang
+        svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
         ./scripts/feeds install -a
     - name: Build ImmortalWrt-21.02
       run: |
