@@ -36,7 +36,7 @@ jobs:
         cd "/home/runner/immortalwrt"
         cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_test" ".config"
         make defconfig
-        make -j1 V=s
+        make -j$[$(nproc)+1]
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-ext4-combined-efi.img.gz" "../immortalwrt-x86-64-generic-ext4-combined-efi.img.gz"
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz" "../immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz"
         mv -f "bin/targets/x86/64/sha256sums" "../immortalwrt-21.02-sha256sums"
