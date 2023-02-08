@@ -1,3 +1,5 @@
+name: x86_64 ImmortalWrt test
+
 on:
   # repository_dispatch:
   workflow_dispatch:
