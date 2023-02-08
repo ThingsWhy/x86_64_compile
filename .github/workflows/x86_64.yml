@@ -1,4 +1,4 @@
-name: x86_64 ImmortalWrt
+name: x86_64 immortalwrt
 
 on:
   # repository_dispatch:
