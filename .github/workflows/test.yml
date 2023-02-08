@@ -1,4 +1,4 @@
-name: x86_64 ImmortalWrt test
+name: x86_64 immortalwrt test
 
 on:
   # repository_dispatch:
