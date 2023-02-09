@@ -1,4 +1,4 @@
-name: x86_64 test test
+name: x86_64 lede test
 
 on:
   # repository_dispatch:
@@ -48,4 +48,3 @@ jobs:
         make defconfig
         make -j1 V=s
         ls -al bin/targets/x86/64
-        
