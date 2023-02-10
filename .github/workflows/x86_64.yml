@@ -62,7 +62,6 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        token: ${{ github.token }}
         files:
           immortalwrt-21.02-sha256sums
           immortalwrt-x86-64-generic-ext4-combined-efi.img.gz
