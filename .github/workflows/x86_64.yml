@@ -59,3 +59,16 @@ jobs:
       with:
         name: immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
         path: /home/runner/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
+    - name: Delete old workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 2
+        keep_minimum_runs: 2
+      
+      
+      
+      
+      
+      
