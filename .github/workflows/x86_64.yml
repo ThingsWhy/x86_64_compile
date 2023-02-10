@@ -59,10 +59,14 @@ jobs:
       with:
         name: immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
         path: /home/runner/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
     - name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
+        name: ${{ steps.date.outputs.today }} x86-64 immortalwrt
         files:
           immortalwrt-21.02-sha256sums
           immortalwrt-x86-64-generic-ext4-combined-efi.img.gz
