@@ -69,6 +69,7 @@ jobs:
       if: steps.firmware.outputs.firmware_status == 'success' && !cancelled()
       with:
         name: ${{ steps.info.outputs.release_date }} x86-64 immortalwrt
+        tag_name: ${{ steps.info.outputs.release_date }} ImmortalWrt
         files:
           immortalwrt-21.02-sha256sums
           immortalwrt-x86-64-generic-ext4-combined-efi.img.gz
