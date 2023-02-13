@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Init Building Dependencies
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -44,17 +44,17 @@ jobs:
         mv -f "bin/targets/x86/64/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz" "../immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz"
         mv -f "bin/targets/x86/64/sha256sums" "../immortalwrt-21.02-sha256sums"
     - name: Upload ImmortalWrt-21.02 SHA256SUM Hash
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: immortalwrt-21.02-sha256sums
         path: /home/runner/immortalwrt-21.02-sha256sums
     - name: Upload ImmortalWrt-21.02 EXT4 Firmware
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: immortalwrt-x86-64-generic-ext4-combined-efi.img.gz
         path: /home/runner/immortalwrt-x86-64-generic-ext4-combined-efi.img.gz
     - name: Upload ImmortalWrt-21.02 SquashFS Firmware
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
         path: /home/runner/immortalwrt-x86-64-generic-squashfs-combined-efi.img.gz
