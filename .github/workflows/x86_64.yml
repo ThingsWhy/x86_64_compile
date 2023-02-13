@@ -69,7 +69,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: steps.firmware.outputs.firmware_status == 'success' && !cancelled()
       with:
-        name: ${{ steps.info.outputs.release_date }} x86-64 immortalwrt
+        name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt
         tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt
         files: /home/runner/bin/*
     - name: Delete old workflow runs
