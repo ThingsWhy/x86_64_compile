@@ -42,7 +42,6 @@ jobs:
         cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt" ".config"
         make defconfig
         make -j$[$(nproc)+1]
-        mkdir "/home/runner/bin"
         echo "firmware_status=success" >> $GITHUB_OUTPUT
     - name: Get Info
       id: info
