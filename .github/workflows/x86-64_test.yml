@@ -1,4 +1,4 @@
-name: x86_64 immortalwrt
+name: x86_64 test
 
 on:
   # repository_dispatch:
@@ -21,6 +21,7 @@ jobs:
         sudo -E docker image prune -a -f
         sudo -E snap set system refresh.retain=2
         sudo -E apt -y purge azure-cli dotnet* firefox ghc* google* llvm* mono* mysql* openjdk* php* zulu* powershell* msodbc* android*
+        sudo -E apt install -y libfuse-dev
         sudo -E apt -y autoremove --purge
         sudo -E apt clean
         sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php
