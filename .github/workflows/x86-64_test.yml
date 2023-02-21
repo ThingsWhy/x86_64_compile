@@ -43,4 +43,4 @@ jobs:
         cd "/home/runner/immortalwrt"
         cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_test" ".config"
         make defconfig
-        make -j$[$(nproc)+1]
+        make -j1 V=s
