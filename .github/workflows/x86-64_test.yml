@@ -42,3 +42,14 @@ jobs:
         cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_test" ".config"
         make defconfig
         make -j$[$(nproc)+1]
+        echo "firmware_status=success" >> $GITHUB_OUTPUT
+    - name: Get Info
+      id: info
+      run: echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: steps.firmware.outputs.firmware_status == 'success' && !cancelled()
+      with:
+        name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt test
+        tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-test
+        files: /home/runner/immortalwrt/bin/targets/x86/64/*
