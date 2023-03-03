@@ -50,6 +50,6 @@ jobs:
       uses: softprops/action-gh-release@v1
       if: steps.firmware.outputs.firmware_status == 'success' && !cancelled()
       with:
-        name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt test
-        tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-test
+        name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt test 1
+        tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-test-1
         files: /home/runner/immortalwrt/bin/targets/x86/64/*
