@@ -31,8 +31,7 @@ jobs:
         git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt
         sudo chown -R runner:runner "immortalwrt"
         cd "/home/runner/immortalwrt"
-        sed -i '$a src-git-full kenzo https://github.com/kenzok8/openwrt-packages;master' feeds.conf.default
-        sed -i '$a src-git-full small https://github.com/kenzok8/small;master' feeds.conf.default
+        sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
     - name: Build ImmortalWrt-21.02
