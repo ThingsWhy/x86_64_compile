@@ -52,4 +52,4 @@ jobs:
       with:
         name: ${{ steps.info.outputs.release_date }} ImmortalWrt test
         tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-test
-        files: /home/runner/immortalwrt/bin/targets/x86/64/*
+        files: /home/runner/immortalwrt/bin/targets/ramips/mt7621/*
