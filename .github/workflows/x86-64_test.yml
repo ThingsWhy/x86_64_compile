@@ -48,7 +48,7 @@ jobs:
       run: echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
     - name: Release
       uses: softprops/action-gh-release@v1
-      if: steps.firmware.outputs.firmware_status == 'success' && !cancelled()
+      if: steps.firmware.outputs.firmware_status == 'success'
       with:
         name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt test
         tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-test
