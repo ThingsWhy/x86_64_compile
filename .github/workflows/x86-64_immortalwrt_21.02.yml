@@ -39,7 +39,7 @@ jobs:
       id: firmware
       run: |
         cd "/home/runner/immortalwrt"
-        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt" ".config"
+        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt_21.02" ".config"
         make defconfig
         make -j$[$(nproc)+1]
         echo "firmware_status=success" >> $GITHUB_OUTPUT
