@@ -31,7 +31,7 @@ jobs:
         git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt
         sudo chown -R runner:runner "immortalwrt"
         cd "/home/runner/immortalwrt"
-        git checkout $(git describe --tags --abbrev=0)
+        # git checkout $(git describe --tags --abbrev=0)
         sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
