@@ -7,7 +7,7 @@ on:
   #   - cron: "0 2 * * *"
 
 jobs:
-  ImmortalWrt-21_02:
+  ImmortalWrt-test:
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout Repository
@@ -35,7 +35,7 @@ jobs:
         sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-    - name: Build ImmortalWrt-21.02
+    - name: Build ImmortalWrt-test
       id: firmware
       run: |
         cd "/home/runner/immortalwrt"
