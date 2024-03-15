@@ -28,7 +28,7 @@ jobs:
     - name: Clone Source
       run: |
         cd "/home/runner"
-        git clone -b openwrt-21.02 --single-branch https://github.com/immortalwrt/immortalwrt
+        git clone -b openwrt-23.05 --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt
         sudo chown -R runner:runner "immortalwrt"
         cd "/home/runner/immortalwrt"
         git checkout $(git describe --tags --abbrev=0)
