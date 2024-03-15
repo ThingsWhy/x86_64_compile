@@ -12,18 +12,20 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: true
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
     - name: Init Building Dependencies
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo -E swapoff -a
-        sudo -E rm -f /swapfile
-        sudo -E docker image prune -a -f
-        sudo -E snap set system refresh.retain=2
-        sudo -E apt -y purge azure-cli dotnet* firefox ghc* google* llvm* mono* mysql* openjdk* php* zulu* powershell* msodbc* android*
-        sudo -E apt -y autoremove --purge
-        sudo -E apt clean
-        sudo -E rm -rf /usr/share/dotnet /usr/local/lib/android/sdk /etc/mysql /etc/php
         sudo -E bash -c 'bash <(curl -s https://build-scripts.immortalwrt.eu.org/init_build_environment.sh)'
     - name: Clone Source
       run: |
