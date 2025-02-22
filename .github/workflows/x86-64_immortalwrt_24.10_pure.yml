@@ -1,4 +1,4 @@
-name: x86_64 immortalwrt_23.05_pure
+name: x86_64 immortalwrt_24.10_pure
 
 on:
   # repository_dispatch:
@@ -7,7 +7,7 @@ on:
     - cron: "0 1 * * 1"
 
 jobs:
-  ImmortalWrt-23_05_pure:
+  ImmortalWrt-24_10_pure:
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout Repository
@@ -30,10 +30,11 @@ jobs:
     - name: Clone Source
       run: |
         cd "/home/runner"
-        git clone -b openwrt-23.05 --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt
+        git clone --filter=blob:none --no-checkout https://github.com/immortalwrt/immortalwrt
         sudo chown -R runner:runner "immortalwrt"
         cd "/home/runner/immortalwrt"
-        # git checkout $(git describe --tags --abbrev=0)
+        git fetch --tags --no-recurse-submodules
+        git checkout $(git tag -l "v*" --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1)
         sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
@@ -41,7 +42,7 @@ jobs:
       id: firmware
       run: |
         cd "/home/runner/immortalwrt"
-        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt_23.05_pure" ".config"
+        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt_24.10_pure" ".config"
         make defconfig
         make -j$[$(nproc)+1]
         echo "firmware_status=success" >> $GITHUB_OUTPUT
