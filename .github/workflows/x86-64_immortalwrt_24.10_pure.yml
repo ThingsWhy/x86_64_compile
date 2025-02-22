@@ -1,0 +1,70 @@
+name: x86_64 immortalwrt_23.05_pure
+
+on:
+  # repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * 1"
+
+jobs:
+  ImmortalWrt-23_05_pure:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    - name: Free Disk Space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: true
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+    - name: Init Building Dependencies
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo -E bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
+    - name: Clone Source
+      run: |
+        cd "/home/runner"
+        git clone -b openwrt-23.05 --single-branch --filter=blob:none https://github.com/immortalwrt/immortalwrt
+        sudo chown -R runner:runner "immortalwrt"
+        cd "/home/runner/immortalwrt"
+        # git checkout $(git describe --tags --abbrev=0)
+        sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+    - name: Build ImmortalWrt-23.05-pure
+      id: firmware
+      run: |
+        cd "/home/runner/immortalwrt"
+        cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt_23.05_pure" ".config"
+        make defconfig
+        make -j$[$(nproc)+1]
+        echo "firmware_status=success" >> $GITHUB_OUTPUT
+    - name: Get Info
+      id: info
+      run: echo "release_date=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: steps.firmware.outputs.firmware_status == 'success'
+      with:
+        name: ${{ steps.info.outputs.release_date }} x86-64 ImmortalWrt 23.05 pure
+        tag_name: ${{ steps.info.outputs.release_date }}-ImmortalWrt-23.05-pure
+        files: /home/runner/immortalwrt/bin/targets/x86/64/*
+    - name: Delete old workflow runs
+      uses: Mattraks/delete-workflow-runs@v2
+      with:
+        token: ${{ github.token }}
+        repository: ${{ github.repository }}
+        retain_days: 3
+        keep_minimum_runs: 2
+    - name: Delete old Releases
+      uses: dev-drprasad/delete-older-releases@v0.3.3
+      with:
+        keep_latest: 5
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
