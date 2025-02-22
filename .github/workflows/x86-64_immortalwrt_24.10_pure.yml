@@ -38,7 +38,7 @@ jobs:
         sed -i '$a src-git own_packages https://github.com/ThingsWhy/own_packages.git;main' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-    - name: Build ImmortalWrt-23.05-pure
+    - name: Build ImmortalWrt-24.10-pure
       id: firmware
       run: |
         cd "/home/runner/immortalwrt"
