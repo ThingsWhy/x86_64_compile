@@ -50,6 +50,14 @@ jobs:
         cd "/home/runner/immortalwrt"
         cp -f "${GITHUB_WORKSPACE}/diffconfig_x86_64_immortalwrt_24.10_pure" ".config"
         make defconfig
+
+        # 先下载所有需要的东西
+        make download -j$[$(nproc)+1]
+
+        # 清理 dl 目录，删除所有 diffconfig 不需要的文件 (即旧版本)
+        make dirclean
+
+        # 现在 dl 目录干净了，开始编译
         make -j$[$(nproc)+1]
         echo "firmware_status=success" >> $GITHUB_OUTPUT
     - name: Get Info
